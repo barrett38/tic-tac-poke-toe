@@ -1,43 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Player from "./components/Player.jsx";
 import Log from "./components/Log.jsx";
 import GameOver from "./components/GameOver.jsx";
 import { WINNING_COMBINATIONS } from "./winning_combinations.js";
-import { getRandomItem } from "./components/getRandomItem.js";
-
-const images = [
-  "./src/PokeBall/articuno.png",
-  "./src/PokeBall/blastoise.png",
-  "./src/PokeBall/blaziken.png",
-  "./src/PokeBall/bulbasaur.png",
-  "./src/PokeBall/butterfree.png",
-  "./src/PokeBall/catterpie.png",
-  "./src/PokeBall/charizard.png",
-  "./src/PokeBall/charmander.png",
-  "./src/PokeBall/cinccino.png",
-  "./src/PokeBall/clefairy.png",
-  "./src/PokeBall/eevee.png",
-  "./src/PokeBall/ekans.png",
-  "./src/PokeBall/gengar.png",
-  "./src/PokeBall/mewtwo.png",
-  "./src/PokeBall/ninetales.png",
-  "./src/PokeBall/pikachu-hat.png",
-];
-
-let pokemon_A = getRandomItem(images);
-let pokemon_B = getRandomItem(images);
-
-if (pokemon_A === pokemon_B) {
-  pokemon_A = "./src/PokeBall/arcanine.png";
-}
+import { getPokemon } from "./components/getPokemon.js";
 
 // inserting Gameboard component here
-function GameBoard({ onSelectSquare, board }) {
-  const imagePaths = {
-    X: pokemon_A,
-    O: pokemon_B,
-  };
-
+function GameBoard({ onSelectSquare, board, player1, player2 }) {
   return (
     <ol id="game-board">
       {board.map((row, rowIndex) => (
@@ -50,7 +19,10 @@ function GameBoard({ onSelectSquare, board }) {
                   disabled={playerSymbol !== null}
                 >
                   {playerSymbol && (
-                    <img src={imagePaths[playerSymbol]} alt={playerSymbol} />
+                    <img
+                      src={playerSymbol === "X" ? player1 : player2}
+                      alt={playerSymbol}
+                    />
                   )}
                 </button>
               </li>
@@ -63,8 +35,8 @@ function GameBoard({ onSelectSquare, board }) {
 }
 
 const PLAYERS = {
-  X: { name: "Player 1", symbol: pokemon_A },
-  O: { name: "Player 2", symbol: pokemon_B },
+  X: { name: "Player 1", symbol: "" },
+  O: { name: "Player 2", symbol: "" },
 };
 
 const INITIAL_GAME_BOARD = [
@@ -118,13 +90,32 @@ function deriveWinner(gameBoard, players) {
   return winner;
 }
 
+const fetchAndSetPlayers = async (setPlayer1, setPlayer2) => {
+  const allPokemon = await Promise.all([getPokemon(), getPokemon()]);
+  console.log("All allPokemon", allPokemon);
+  setPlayer1((player1) => ({ ...player1, symbol: allPokemon[0] }));
+  setPlayer2((player2) => ({ ...player2, symbol: allPokemon[1] }));
+};
+
 function App() {
+  const [player1, setPlayer1] = useState({
+    name: "Player 1", // This is the default name
+    symbol: "",
+  });
+  const [player2, setPlayer2] = useState({
+    name: "Player 2",
+    symbol: "",
+  });
   const [players, setPlayers] = useState(PLAYERS);
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
   const gameBoard = deriveGameBoard(gameTurns);
   const winner = deriveWinner(gameBoard, players);
   const hasDraw = gameTurns.length === 9 && !winner;
+
+  useEffect(() => {
+    fetchAndSetPlayers(setPlayer1, setPlayer2);
+  }, []);
 
   function handleSelectSquare(rowIndex, colIndex) {
     setGameTurns((prevTurns) => {
@@ -157,14 +148,14 @@ function App() {
       <div id="game-container">
         <ol id="players" className="highlight-player">
           <Player
-            initialName={players.X.name}
-            symbol={players.X.symbol}
+            initialName={player1.name}
+            symbol={player1.symbol}
             isActive={activePlayer === "X"}
             onChangedName={handlePlayerNameChange}
           />
           <Player
-            initialName={players.O.name}
-            symbol={players.O.symbol}
+            initialName={player2.name}
+            symbol={player2.symbol}
             isActive={activePlayer === "O"}
             onChangedName={handlePlayerNameChange}
           />
@@ -173,6 +164,8 @@ function App() {
           <GameOver winner={winner} onRestart={handleRematch} />
         )}
         <GameBoard
+          player1={player1.symbol}
+          player2={player2.symbol}
           onSelectSquare={handleSelectSquare}
           activePlayerSymbol={activePlayer}
           board={gameBoard}
