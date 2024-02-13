@@ -68,6 +68,13 @@ function deriveGameBoard(gameTurns) {
   return gameBoard;
 }
 
+const fetchAndSetPlayers = async (setPlayer1, setPlayer2) => {
+  const allPokemon = await Promise.all([getPokemon(), getPokemon()]);
+  console.log("All allPokemon", allPokemon);
+  setPlayer1((player1) => ({ ...player1, symbol: allPokemon[0] }));
+  setPlayer2((player2) => ({ ...player2, symbol: allPokemon[1] }));
+};
+
 function deriveWinner(gameBoard, players) {
   let winner;
 
@@ -89,13 +96,6 @@ function deriveWinner(gameBoard, players) {
   }
   return winner;
 }
-
-const fetchAndSetPlayers = async (setPlayer1, setPlayer2) => {
-  const allPokemon = await Promise.all([getPokemon(), getPokemon()]);
-  console.log("All allPokemon", allPokemon);
-  setPlayer1((player1) => ({ ...player1, symbol: allPokemon[0] }));
-  setPlayer2((player2) => ({ ...player2, symbol: allPokemon[1] }));
-};
 
 function App() {
   const [player1, setPlayer1] = useState({
