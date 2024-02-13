@@ -99,13 +99,14 @@ const fetchAndSetPlayers = async (setPlayer1, setPlayer2) => {
 
 function App() {
   const [player1, setPlayer1] = useState({
-    name: "Player 1", // This is the default name
+    name: "Pokemon Trainer 1", // This is the default name
     symbol: "",
   });
   const [player2, setPlayer2] = useState({
-    name: "Player 2",
+    name: "Pokemon Trainer 2", // This is the default name
     symbol: "",
   });
+
   const [players, setPlayers] = useState(PLAYERS);
   const [gameTurns, setGameTurns] = useState([]);
   const activePlayer = deriveActivePlayer(gameTurns);
