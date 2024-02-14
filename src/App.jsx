@@ -60,6 +60,26 @@ function App() {
     }
   }
 
+  const [updatedPlayer1Name, setUpdatedPlayer1Name] = useState("");
+
+  useEffect(() => {
+    if (player1.name) {
+      setUpdatedPlayer1Name(player1.name);
+    }
+  }, [player1.name]);
+
+  const placeHolder1 = updatedPlayer1Name;
+  console.log(placeHolder1);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAndSetPlayers(setPlayer1, setPlayer2).then(() => setIsLoading(false));
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <main>
       <div id="game-container">
