@@ -4,35 +4,8 @@ import Log from "./components/Log.jsx";
 import GameOver from "./components/GameOver.jsx";
 import { WINNING_COMBINATIONS } from "./winning_combinations.js";
 import { getPokemon } from "./components/getPokemon.js";
-
-// inserting Gameboard component here
-function GameBoard({ onSelectSquare, board, player1, player2 }) {
-  return (
-    <ol id="game-board">
-      {board.map((row, rowIndex) => (
-        <li key={rowIndex}>
-          <ol>
-            {row.map((playerSymbol, colIndex) => (
-              <li key={colIndex}>
-                <button
-                  onClick={() => onSelectSquare(rowIndex, colIndex)}
-                  disabled={playerSymbol !== null}
-                >
-                  {playerSymbol && (
-                    <img
-                      src={playerSymbol === "X" ? player1 : player2}
-                      alt={playerSymbol}
-                    />
-                  )}
-                </button>
-              </li>
-            ))}
-          </ol>
-        </li>
-      ))}
-    </ol>
-  );
-}
+import GameBoard from "./components/GameBoard.jsx";
+import deriveActivePlayer from "./components/deriveActivePlayer.js";
 
 const PLAYERS = {
   X: { name: "Player 1", symbol: "" },
@@ -44,16 +17,6 @@ const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
 ];
-
-function deriveActivePlayer(gameTurns) {
-  let currentPlayer = "X";
-
-  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
-    currentPlayer = "O";
-  }
-
-  return currentPlayer;
-}
 
 function deriveGameBoard(gameTurns) {
   let gameBoard = [...INITIAL_GAME_BOARD.map((array) => [...array])];
