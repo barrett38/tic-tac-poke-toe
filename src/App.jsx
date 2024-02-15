@@ -7,13 +7,7 @@ import { getPokemon } from "./components/getPokemon.js";
 import GameBoard from "./components/GameBoard.jsx";
 import deriveActivePlayer from "./components/deriveActivePlayer.js";
 import deriveGameBoard from "./components/derive.js";
-
-const fetchAndSetPlayers = async (setPlayer1, setPlayer2) => {
-  const allPokemon = await Promise.all([getPokemon(), getPokemon()]);
-  console.log("All allPokemon", allPokemon);
-  setPlayer1({ name: allPokemon[0].name, symbol: allPokemon[0].sprite });
-  setPlayer2({ name: allPokemon[1].name, symbol: allPokemon[1].sprite });
-};
+import RefreshButton from "./components/refreshButton.jsx";
 
 function App() {
   const [player1, setPlayer1] = useState({
@@ -25,8 +19,15 @@ function App() {
     symbol: "",
   });
 
+  const fetchAndSetPlayers = async () => {
+    const allPokemon = await Promise.all([getPokemon(), getPokemon()]);
+    console.log("All allPokemon", allPokemon);
+    setPlayer1({ name: allPokemon[0].name, symbol: allPokemon[0].sprite });
+    setPlayer2({ name: allPokemon[1].name, symbol: allPokemon[1].sprite });
+  };
+
   useEffect(() => {
-    fetchAndSetPlayers(setPlayer1, setPlayer2);
+    fetchAndSetPlayers();
   }, []);
 
   const [gameTurns, setGameTurns] = useState([]);
@@ -60,29 +61,10 @@ function App() {
     }
   }
 
-  const [updatedPlayer1Name, setUpdatedPlayer1Name] = useState("");
-
-  useEffect(() => {
-    if (player1.name) {
-      setUpdatedPlayer1Name(player1.name);
-    }
-  }, [player1.name]);
-
-  const placeHolder1 = updatedPlayer1Name;
-  console.log(placeHolder1);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetchAndSetPlayers(setPlayer1, setPlayer2).then(() => setIsLoading(false));
-  }, []);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <main>
       <div id="game-container">
+        <RefreshButton onRefresh={fetchAndSetPlayers} />
         <ol id="players" className="highlight-player">
           <Player
             initialName={player1.name}

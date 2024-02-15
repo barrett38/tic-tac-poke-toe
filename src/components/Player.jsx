@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Player({
   initialName,
@@ -8,6 +8,10 @@ export default function Player({
 }) {
   const [playerName, setPlayerName] = useState(initialName);
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setPlayerName(initialName);
+  }, [initialName]);
 
   function handleEditClick() {
     setIsEditing((editing) => !editing);
