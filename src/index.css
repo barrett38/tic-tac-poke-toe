@@ -93,14 +93,14 @@ h1 {
 /* POKEMON */
 
 #game-board .player-symbol {
-  width: 110px;
-  height: 110px;
+  width: 101px;
+  height: 101px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 587px) {
   #game-board .player-symbol {
-    width: 18px;
-    height: 18px;
+    width: 56px;
+    height: 56px;
     display: flex;
     flex-direction: row;
     /* flex-wrap: nowrap; */
@@ -110,6 +110,57 @@ h1 {
   }
 }
 
+@media (max-width: 533px) {
+  #game-board .player-symbol {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+@media (max-width: 407px) {
+  #game-board .player-symbol {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+@media (max-width: 344px) {
+  #game-board .player-symbol {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+@media (max-width: 263px) {
+  #game-board .player-symbol {
+    width: 11px;
+    height: 11px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
 /* SQUARES */
 
 #game-board .square {
