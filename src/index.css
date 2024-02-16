@@ -191,8 +191,8 @@ h1 {
 
 @media (max-width: 344px) {
   #game-board .square {
-    width: 38px;
-    height: 38px;
+    width: 47px;
+    height: 47px;
   }
 }
 
