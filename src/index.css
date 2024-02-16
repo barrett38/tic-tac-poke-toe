@@ -184,8 +184,8 @@ h1 {
 
 @media (max-width: 407px) {
   #game-board .square {
-    width: 65px;
-    height: 65px;
+    width: 74px;
+    height: 74px;
   }
 }
 
@@ -196,7 +196,7 @@ h1 {
   }
 }
 
-@media (max-width: 263px) {
+@media (max-width: 266px) {
   #game-board .square {
     width: 29px;
     height: 29px;
