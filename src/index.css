@@ -239,6 +239,50 @@ h1 {
   gap: 2rem;
 }
 
+#players .player-symbol {
+  width: 250px;
+  height: 250px;
+}
+
+@media (max-width: 700px) {
+  #players .player-symbol {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+@media (max-width: 587px) {
+  #players .player-symbol {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  #players .player-symbol {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
 #players li {
   display: flex;
   align-items: center;

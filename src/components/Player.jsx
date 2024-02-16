@@ -38,9 +38,9 @@ export default function Player({
         {editablePlayerName}
         <img className="player-symbol" src={symbol} alt="player symbol" />
       </span>
-      <button onClick={handleEditClick} tabIndex="0">
+      {/* <button onClick={handleEditClick} tabIndex="0">
         {isEditing ? "Save" : "Edit"}
-      </button>
+      </button> */}
     </li>
   );
 }
