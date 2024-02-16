@@ -89,14 +89,14 @@ h1 {
 }
 
 #game-board .square {
-  width: 11px;
-  height: 11px;
+  width: 110px;
+  height: 110px;
 }
 
 @media (max-width: 600px) {
   #game-board .square {
-    width: 117px;
-    height: 117px;
+    width: 110px;
+    height: 110px;
   }
 }
 
