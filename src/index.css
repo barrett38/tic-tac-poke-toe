@@ -88,17 +88,49 @@ h1 {
   user-select: none;
 }
 
-#game-board .square {
+/* Resizing */
+
+/* POKEMON */
+
+#game-board .player-symbol {
   width: 110px;
   height: 110px;
 }
 
 @media (max-width: 600px) {
-  #game-board .square {
-    width: 110px;
-    height: 110px;
+  #game-board .player-symbol {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    flex-direction: row;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
 }
+
+/* SQUARES */
+
+#game-board .square {
+  width: 137px;
+  height: 137px;
+}
+
+@media (max-width: 600px) {
+  #game-board .square {
+    width: 29px;
+    height: 29px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+}
+
+/* Resizing above */
 
 .row {
   display: flex;

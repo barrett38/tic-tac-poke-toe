@@ -13,10 +13,9 @@ export default function GameBoard({ onSelectSquare, board, player1, player2 }) {
                 >
                   {playerSymbol && (
                     <img
+                      className="player-symbol"
                       src={playerSymbol === "X" ? player1 : player2}
                       alt={playerSymbol}
-                      width="83" // width in pixels
-                      height="83" // height in pixels
                     />
                   )}
                 </button>
