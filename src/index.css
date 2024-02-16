@@ -189,17 +189,17 @@ h1 {
   }
 }
 
-@media (max-width: 344px) {
+@media (max-width: 367px) {
   #game-board .square {
-    width: 35px;
-    height: 35px;
+    width: 65px;
+    height: 65px;
   }
 }
 
-@media (max-width: 266px) {
+@media (max-width: 339px) {
   #game-board .square {
-    width: 29px;
-    height: 29px;
+    width: 47px;
+    height: 47px;
   }
 }
 
