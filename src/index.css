@@ -88,6 +88,27 @@ h1 {
   user-select: none;
 }
 
+#game-board .square {
+  width: 11px;
+  height: 11px;
+}
+
+@media (max-width: 600px) {
+  #game-board .square {
+    width: 117px;
+    height: 117px;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+}
+
 #game-container {
   max-width: 45rem;
   margin: 3rem auto;

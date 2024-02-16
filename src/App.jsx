@@ -9,6 +9,10 @@ import deriveActivePlayer from "./components/deriveActivePlayer.js";
 import deriveGameBoard from "./components/derive.js";
 import RefreshButton from "./components/refreshButton.jsx";
 
+// deployment options:
+// https://www.vercel.com/
+// https://www.netlify.com/
+
 function App() {
   const [player1, setPlayer1] = useState({
     name: "", // This is the default name
@@ -64,7 +68,9 @@ function App() {
   return (
     <main>
       <div id="game-container">
-        <RefreshButton onRefresh={fetchAndSetPlayers} />
+        <div>
+          <RefreshButton onRefresh={fetchAndSetPlayers} />
+        </div>
         <ol id="players" className="highlight-player">
           <Player
             initialName={player1.name}
